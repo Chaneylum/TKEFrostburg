@@ -123,30 +123,19 @@ if(isset($_POST['submit'])){
 
 function connectDB() {
 	
-	$conn = new PDO('mysql:host=52.73.15.164;dbname=Tke1', $username, $password, $scroll);	
-	
-//	try{
-//	$conn = new PDO("sqlsrv:Server=ec2-52-73-15-164.compute-1.amazonaws.com\\sqlexpress;Database=Tke1", "login", "Sweetarts11");
-//    return $conn;
-//	}
-//	catch (Exception $e){
-//		echo 'Caught exception: ',  $e->getMessage(), "\n";
-//	}
-
+	try{
+	$conn = new PDO('mysql:host=52.73.15.164;dbname=Tke1','root' 'Sweetarts11');
+	return $conn;
+	}
+	catch (Exception $e){
+		echo 'Caught exception: ", $e->getMessage(), "\n";
+	}
 }
 function getUsers($dbc){
 	try{
-		$query = $dbc->prepare("SELECT FirstName, LastName, EmployeeID FROM dbo.Users");
+		$query = $dbc->prepare("SELECT username, password, scroll FROM dbo.login");
 		$query->execute();
-		echo"<form method=\"post\" action=\"{$_SERVER['PHP_SELF']}\">";
-		echo "<select name=\"formUserID\">";
-		echo "<option value=\"\">Select...</option>";
-		for ($i = 0; $row = $query->fetch(); $i++){
-			$employees = $row['EmployeeID'];
-			$valueData = "{$row['LastName']}, {$row['FirstName']}";
-			echo "<option value=\"{$row['EmployeeID']}\">{$valueData}</option>";
-		}
-		echo "</select>";
+		echo 
 	}
 	catch(Exception $e){echo "Oh well!";}
 }
