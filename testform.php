@@ -123,7 +123,7 @@ if(isset($_POST['submit'])){
 
 function connectDB() {
 	try{
-	$conn = new PDO("sqlsrv:52.73.15.164\\sqlexpress;Database=Tke1", "login", "Sweetarts11");
+	$conn = new PDO("sqlsrv:Server=52.73.15.164\\sqlexpress;Database=Tke1", "login", "Sweetarts11");
     return $conn;
 	}
 	catch (Exception $e){
