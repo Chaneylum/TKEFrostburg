@@ -141,7 +141,7 @@
 
 $fields = array('username','password','scroll');
 $db = connectDB();
-$dbc = getUsers();
+
 function connectDB() {
 	//Step1
 	try{
@@ -162,7 +162,9 @@ function connectDB() {
  	if (!$result) {
  	die("Database query failed: " . mysql_error());
  	}
-}	
+}
+$dbc = getUsers();
+	
 function getUsers($dbc){
 	try{
 		$query = $dbc->prepare("SELECT username, password, scroll FROM dbo.login");
