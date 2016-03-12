@@ -163,6 +163,8 @@ function connectDB() {
  	die("Database query failed: " . mysql_error());
  	}
 	//Step4
+	mysql_close($db);
+}	
 function getUsers($dbc){
 	try{
 		$query = $dbc->prepare("SELECT username, password, scroll FROM dbo.login");
@@ -175,11 +177,8 @@ function getUsers($dbc){
 	}
 	catch(Exception $e){echo "Oh well!";}
 }
-
-
-
 //Step5
-mysql_close($db);
+mysql_close($dbc);
 ?>
 
 </div>
