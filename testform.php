@@ -166,11 +166,9 @@ function connectDB() {
  	while ($row = mysql_fetch_array($result)) {
  	echo $row[1]." ".$row[2]."<br />";
  	}
-
-	//Step5
- 	mysql_close($db);
-	
-	}
+}
+//Step5
+mysql_close($db);
 ?>
 
 </div>
