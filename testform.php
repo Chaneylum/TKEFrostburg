@@ -141,7 +141,7 @@
 
 $fields = array('username','password','scroll');
 $db = connectDB();
-
+$dbc = getUsers();
 function connectDB() {
 	//Step1
 	try{
@@ -167,8 +167,6 @@ function getUsers($dbc){
 	try{
 		$query = $dbc->prepare("SELECT username, password, scroll FROM dbo.login");
 		$query->execute();
-		echo"<form method=\"form\" action=\"{$_SERVER['PHP_SELF']}\">"
-		
 		for ($i = 0; $row = $query->fetch(); $i++){
 			$username = $row['username'];
 			$password = $row['password'];
@@ -177,7 +175,7 @@ function getUsers($dbc){
 	}
 	catch(Exception $e){echo "Oh well!";}
 }
-}
+
 
 
 //Step5
