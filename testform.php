@@ -162,8 +162,6 @@ function connectDB() {
  	if (!$result) {
  	die("Database query failed: " . mysql_error());
  	}
-	//Step4
-	mysql_close($db);
 }	
 function getUsers($dbc){
 	try{
@@ -179,6 +177,7 @@ function getUsers($dbc){
 }
 //Step5
 mysql_close($dbc);
+mysql_close($db);
 ?>
 
 </div>
