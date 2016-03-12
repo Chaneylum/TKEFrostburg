@@ -101,114 +101,19 @@
 <p>Using the Boxes below, sign in to the forum :)</p>
 
 <?php
-$fields = ('username','password','scroll');
-$newconn = connectDB();
-
-if(isset($_POST['submit'])){
-	$error = false;
-	foreach($fields AS $fieldname) {
-		//For each field, check to make sure the field has a value
-		if(!isset($_POST[$fieldname]) || empty($_POST[$fieldname])) {
-			$error = true;
-		}
-	}
-
-	if(!$error) { //Only create queries when no error occurs
-		updateUsers($newconn);
-	}
-	else{
-		echo "<p><font color='red'>Please fill out all required fields before submitting changes.</font></p>";
-	}
-}
 
 function connectDB() {
 	
 	try{
-	$conn = new PDO('mysql:host=52.73.15.164;dbname=Tke1','root' 'Sweetarts11');
+	$conn = new PDO('mysql:host=52.73.15.164;dbname=Tke1', 'root','Sweetarts11');
 	return $conn;
 	}
-	catch (Exception $e){
-		echo 'Caught exception: ", $e->getMessage(), "\n";
+	catch (PDOException $e) {
+    print "Error!: " . $e->getMessage() . "<br/>";
+    die();
 	}
-}
-function getUsers($dbc){
-	try{
-		$query = $dbc->prepare("SELECT username, password, scroll FROM dbo.login");
-		$query->execute();
-		echo 
 	}
-	catch(Exception $e){echo "Oh well!";}
-}
-function updateUsers($c){
-	try{
-		$c->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = $c->prepare("UPDATE dbo.Users SET SundayOnDuty = :sunOn, SundayOffDuty = :sunOff, MondayOnDuty = :monOn,
-		MondayOffDuty = :monOff, TuesdayOnDuty = :tueOn, TuesdayOffDuty = :tueOff, WednesdayOnDuty = :wedOn,
-		WednesdayOffDuty = :wedOff, ThursdayOnDuty = :thuOn, ThursdayOffDuty = :thuOff, FridayOnDuty = :friOn,
-		FridayOffDuty = :friOff, SaturdayOnDuty = :satOn, SaturdayOffDuty = :satOff, OnVacation = :onVac,
-		Active = :activ, EscalationLevel = :escLev WHERE EmployeeID = :formID;");
-		
-		$sundatfo = date("Y-m-d H:i:s",strtotime($_POST['sunOnDuty']));
-		$sun2datfo = date("Y-m-d H:i:s",strtotime($_POST['sunOffDuty']));
-		$mondatfo = date("Y-m-d H:i:s",strtotime($_POST['monOnDuty']));
-		$mon2datfo = date("Y-m-d H:i:s",strtotime($_POST['monOffDuty']));
-		$tuedatfo = date("Y-m-d H:i:s",strtotime($_POST['tuesOnDuty']));
-		$tue2datfo = date("Y-m-d H:i:s",strtotime($_POST['tuesOffDuty']));
-		$weddatfo = date("Y-m-d H:i:s",strtotime($_POST['wedsOnDuty']));
-		$wed2datfo = date("Y-m-d H:i:s",strtotime($_POST['wedsOffDuty']));
-		$thudatfo = date("Y-m-d H:i:s",strtotime($_POST['thursOnDuty']));
-		$thu2datfo = date("Y-m-d H:i:s",strtotime($_POST['thursOffDuty']));
-		$fridatfo = date("Y-m-d H:i:s",strtotime($_POST['friOnDuty']));
-		$fri2datfo = date("Y-m-d H:i:s",strtotime($_POST['friOffDuty']));
-		$satdatfo = date("Y-m-d H:i:s",strtotime($_POST['satOnDuty']));
-		$sat2datfo = date("Y-m-d H:i:s",strtotime($_POST['satOffDuty']));
-		
-		$sql->bindParam(':sunOn', $sundatfo, PDO::PARAM_STR);
-		$sql->bindParam(':sunOff', $sun2datfo, PDO::PARAM_STR);
-		$sql->bindParam(':monOn', $mondatfo, PDO::PARAM_STR);
-		$sql->bindParam(':monOff', $mon2datfo, PDO::PARAM_STR);
-		$sql->bindParam(':tueOn', $tuedatfo, PDO::PARAM_STR);
-		$sql->bindParam(':tueOff', $tue2datfo, PDO::PARAM_STR);
-		$sql->bindParam(':wedOn', $weddatfo, PDO::PARAM_STR);
-		$sql->bindParam(':wedOff', $wed2datfo, PDO::PARAM_STR);
-		$sql->bindParam(':thuOn', $thudatfo, PDO::PARAM_STR);
-		$sql->bindParam(':thuOff', $thu2datfo, PDO::PARAM_STR);
-		$sql->bindParam(':friOn', $fridatfo, PDO::PARAM_STR);
-		$sql->bindParam(':friOff', $fri2datfo, PDO::PARAM_STR);
-		$sql->bindParam(':satOn', $satdatfo, PDO::PARAM_STR);
-		$sql->bindParam(':satOff', $sat2datfo, PDO::PARAM_STR);
-		
-		$sql->bindParam(':onVac', $_POST['onVacation'], PDO::PARAM_BOOL);
-		$sql->bindParam(':activ', $_POST['active'], PDO::PARAM_BOOL);
-		$sql->bindParam(':escLev', $_POST['escLevel'], PDO::PARAM_INT);
-		$sql->bindParam(':formID', $_POST['formUserID'], PDO::PARAM_INT);
-		
-		$sql->execute();
-		echo "User updated successfully!";	
-	}
-	catch(Exception $e){
-		echo "Check Input Error: " .$e->getMessage(). "</br>";
-		echo "Trouble at the mill!";
-	}
-}
-try{
-	$conn = connectDB();
-	if($conn) {
-		getUsers($conn);		
-	}
-	else {
-		echo "Connection could not be established.<br />";
-		die( print_r( sqlsrv_errors(), true));
-	}
-}
-catch(Exception $e) {
-	echo 'Caught exception: ',  $e->getMessage(), "\n";
-}
- ?>
-
-<input type="submit", name="submit", value = "Submit"/>
-
-</form>
+?>
 
 </div>
 
