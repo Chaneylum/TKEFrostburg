@@ -140,6 +140,7 @@
 <?php
 
 $fields = array('username','password','scroll');
+$db = connectDB();
 
 function connectDB() {
 	//Step1
@@ -168,8 +169,9 @@ function connectDB() {
 
 	//Step5
  	mysql_close($db);
+	
 	}
-	?>
+?>
 
 </div>
 
