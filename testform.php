@@ -116,12 +116,12 @@
                                 <input type="text" class="form-control">
                             </div>
                             <div class="form-group col-lg-4">
-                                <label>Email Address</label>
-                                <input type="email" class="form-control">
+                                <label>Password</label>
+                                <input type="text" class="form-control">
                             </div>
                             <div class="form-group col-lg-4">
-                                <label>Phone Number</label>
-                                <input type="tel" class="form-control">
+                                <label>Scroll</label>
+                                <input type="text" class="form-control">
                             </div>
                             <div class="clearfix"></div>
                             <div class="form-group col-lg-12">
@@ -157,16 +157,29 @@ function connectDB() {
  	if (!$db_select) {
  	die("Database selection also failed miserably: " . mysql_error());
  	}
-	
+	//Step3
 	$result = mysql_query("SELECT * FROM login", $db);
  	if (!$result) {
  	die("Database query failed: " . mysql_error());
  	}
 	//Step4
- 	while ($row = mysql_fetch_array($result)) {
- 	echo $row[1]." ".$row[2]."<br />";
- 	}
+function getUsers($dbc){
+	try{
+		$query = $dbc->prepare("SELECT username, password, scroll FROM dbo.login");
+		$query->execute();
+		echo"<form method=\"form\" action=\"{$_SERVER['PHP_SELF']}\">"
+		
+		for ($i = 0; $row = $query->fetch(); $i++){
+			$username = $row['username'];
+			$password = $row['password'];
+			$scroll = $row['scroll'];
+		}
+	}
+	catch(Exception $e){echo "Oh well!";}
 }
+}
+
+
 //Step5
 mysql_close($db);
 ?>
