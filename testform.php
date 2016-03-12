@@ -168,14 +168,21 @@ function connectDB() {
 
 	//Step5
  	mysql_close($db);
+	}
 	?>
-}
+
 </div>
 
 </div>
 
 <div class="footer">
-		
+		<div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <p>Contact &copy; TKEFrostburg@gmail.com</p>
+                </div>
+            </div>
+        </div>
 </div><!-- end .footer -->
 </div><!-- end .container -->
 </body>
