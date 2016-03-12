@@ -141,23 +141,6 @@
 
 $fields = array('username','password','scroll');
 
-if(isset($_POST['submit'])){
-	$error = false;
-	foreach($fields AS $fieldname) {
-		//For each field, check to make sure the field has a value
-		if(!isset($_POST[$fieldname]) || empty($_POST[$fieldname])) {
-			$error = true;
-		}
-	}
-
-	if(!$error) { //Only create queries when no error occurs
-		updateUsers($newconn);
-	}
-	else{
-		echo "<p><font color='red'>Please fill out all required fields before submitting changes.</font></p>";
-	}
-}
-
 function connectDB() {
 	//Step1
 	try{
