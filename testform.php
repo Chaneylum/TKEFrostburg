@@ -98,11 +98,10 @@
  
 <div class="content">
 <div class="newsBox">
-<p>Using the dropdown menu, select the user whose schedule you wish to update.</p>
+<p>Using the Boxes below, sign in to the forum :)</p>
 
 <?php
-$fields = array('sunOnDuty','sunOffDuty','monOnDuty','monOffDuty','tuesOnDuty','tuesOffDuty','wedsOnDuty','wedsOffDuty','thursOnDuty','thursOffDuty',
-'friOnDuty','friOffDuty','satOnDuty','satOffDuty', 'formUserID');
+$fields = ('username','password','scroll');
 $newconn = connectDB();
 
 if(isset($_POST['submit'])){
@@ -124,7 +123,7 @@ if(isset($_POST['submit'])){
 
 function connectDB() {
 	try{
-	$conn = new PDO("sqlsrv:Server=scada1\\sqlexpress;Database=SCADA_Server", "scadaserver", "7k!8mng0X1");
+	$conn = new PDO("sqlsrv:ec2-52-73-15-164.compute-1.amazonaws.com\\sqlexpress;Database=Tke1", "login", "Sweetarts11");
     return $conn;
 	}
 	catch (Exception $e){
