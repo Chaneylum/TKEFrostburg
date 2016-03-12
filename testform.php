@@ -122,13 +122,17 @@ if(isset($_POST['submit'])){
 }
 
 function connectDB() {
-	try{
-	$conn = new PDO("sqlsrv:Server=52.73.15.164\\sqlexpress;Database=Tke1", "login", "Sweetarts11");
-    return $conn;
-	}
-	catch (Exception $e){
-		echo 'Caught exception: ',  $e->getMessage(), "\n";
-	}
+	
+	$conn = new PDO('mysql:host=52.73.15.164;dbname=Tke1', $username, $password, $scroll);	
+	
+//	try{
+//	$conn = new PDO("sqlsrv:Server=ec2-52-73-15-164.compute-1.amazonaws.com\\sqlexpress;Database=Tke1", "login", "Sweetarts11");
+//    return $conn;
+//	}
+//	catch (Exception $e){
+//		echo 'Caught exception: ',  $e->getMessage(), "\n";
+//	}
+
 }
 function getUsers($dbc){
 	try{
