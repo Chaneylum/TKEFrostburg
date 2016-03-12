@@ -169,6 +169,20 @@ function connectDB() {
     die();
 	}
 	}
+
+	$result = mysql_query("SELECT * FROM login", $conn);
+ 	if (!$result) {
+ 	die("Database query failed: " . mysql_error());
+ 	}
+//Step4
+ 	while ($row = mysql_fetch_array($result)) {
+ 	echo $row[1]." ".$row[2]."<br />";
+ 	}
+?>
+
+<?php
+//Step5
+ mysql_close($db);
 ?>
 
 </div>
