@@ -112,7 +112,7 @@
                     <form role="form">
                         <div class="row">
                             <div class="form-group col-lg-4">
-                                <label>Name</label>
+                                <label>Username</label>
                                 <input type="text" class="form-control">
                             </div>
                             <div class="form-group col-lg-4">
@@ -139,10 +139,29 @@
         </div>
 <?php
 
+$fields = array('username','password','scroll');
+
+if(isset($_POST['submit'])){
+	$error = false;
+	foreach($fields AS $fieldname) {
+		//For each field, check to make sure the field has a value
+		if(!isset($_POST[$fieldname]) || empty($_POST[$fieldname])) {
+			$error = true;
+		}
+	}
+
+	if(!$error) { //Only create queries when no error occurs
+		updateUsers($newconn);
+	}
+	else{
+		echo "<p><font color='red'>Please fill out all required fields before submitting changes.</font></p>";
+	}
+}
+
 function connectDB() {
 	
 	try{
-	$conn = new PDO('mysql:host=52.73.15.164;dbname=Tke1', 'root','Sweetarts11');
+	$conn = new PDO('mysql:host=52.73.15.164;dbname=Tke1','root','Sweetarts11');
 	return $conn;
 	}
 	catch (PDOException $e) {
