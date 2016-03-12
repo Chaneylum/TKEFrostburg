@@ -159,32 +159,34 @@ if(isset($_POST['submit'])){
 }
 
 function connectDB() {
-	
+	//Step1
 	try{
-	$conn = new PDO('mysql:host=52.73.15.164;dbname=Tke1','root','Sweetarts11');
-	return $conn;
+	$db = new PDO('mysql:host=52.73.15.164;dbname=Tke1','root','Sweetarts11');
+	return $db;
 	}
 	catch (PDOException $e) {
     print "Error!: " . $e->getMessage() . "<br/>";
     die();
 	}
-	}
-
-	$result = mysql_query("SELECT * FROM login", $conn);
+	//Step2
+ 	$db_select = mysql_select_db("login",$db);
+ 	if (!$db_select) {
+ 	die("Database selection also failed miserably: " . mysql_error());
+ 	}
+	
+	$result = mysql_query("SELECT * FROM login", $db);
  	if (!$result) {
  	die("Database query failed: " . mysql_error());
  	}
-//Step4
+	//Step4
  	while ($row = mysql_fetch_array($result)) {
  	echo $row[1]." ".$row[2]."<br />";
  	}
-?>
 
-<?php
-//Step5
- mysql_close($db);
-?>
-
+	//Step5
+ 	mysql_close($db);
+	?>
+}
 </div>
 
 </div>
