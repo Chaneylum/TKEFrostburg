@@ -178,7 +178,6 @@ function getUsers($dbc){
 	catch(Exception $e){echo "Oh well!";}
 }
 //Step5
-mysql_close($dbc);
 mysql_close($db);
 ?>
 
