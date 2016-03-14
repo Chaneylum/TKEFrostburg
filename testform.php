@@ -145,7 +145,7 @@ $db = connectDB();
 function connectDB() {
 	//Step1
 	try{
-	$db = new PDO('mysql:host=52.73.15.164;dbname=Tke1','root','Sweetarts11');
+	$db = new PDO('mysql:host=52.73.15.164;dbname=Tke1','root','');
 	return $db;
 	}
 	catch (PDOException $e) {
